@@ -5,6 +5,7 @@ module.exports = {
   devtool: false,
   entry: [
     'babel-polyfill',
+    'whatwg-fetch',
     './src/index'
   ],
   output: {
