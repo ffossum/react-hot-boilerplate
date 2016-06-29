@@ -4,6 +4,7 @@
   "description": "Boilerplate for ReactJS project with hot code reloading",
   "scripts": {
     "start": "node server.js",
+    "build": "webpack --config ./webpack.build.config.js",
     "lint": "eslint src"
   },
   "repository": {
@@ -41,7 +42,9 @@
     "webpack-dev-server": "^1.12.1"
   },
   "dependencies": {
+    "moment": "^2.13.0",
     "react": "^0.14.6",
-    "react-dom": "^0.14.6"
+    "react-dom": "^0.14.6",
+    "whatwg-fetch": "^1.0.0"
   }
 }
