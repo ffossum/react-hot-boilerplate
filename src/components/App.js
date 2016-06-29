@@ -12,9 +12,9 @@ export default class App extends Component {
             <tr>
               <th className="table--head"></th>
               <th className="table--head table--head--text">Repository name</th>
-              <th className="table--head table--head--numeric">Stargazers</th>
-              <th className="table--head table--head--numeric">Watchers</th>
+              <th className="table--head table--head--numeric">Stars</th>
               <th className="table--head table--head--numeric">Forks</th>
+              <th className="table--head table--head--numeric">Open issues</th>
               <th className="table--head table--head--text">Latest push</th>
             </tr>
           </thead>
@@ -27,8 +27,8 @@ export default class App extends Component {
                   </td>
                   <td className="table--body--text"><a href={item.html_url}>{item.full_name}</a></td>
                   <td className="table--body--numeric">{item.stargazers_count}</td>
-                  <td className="table--body--numeric">{item.watchers_count}</td>
                   <td className="table--body--numeric">{item.forks}</td>
+                  <td className="table--body--numeric">{item.open_issues}</td>
                   <td className="table--body--text">{moment(item.pushed_at).fromNow()}</td>
                 </tr>
               ))
@@ -36,9 +36,9 @@ export default class App extends Component {
           </tbody>
         </table>
         <div>
-          <button className="button" onClick={previousPage} disabled={currentPage <= 1}>Previous</button>
+          <button className="button" onClick={previousPage} disabled={currentPage <= 1 || isFetching}>Previous</button>
           <div className="current-page">{currentPage}</div>
-          <button className="button" onClick={nextPage}>Next</button>
+          <button className="button" onClick={nextPage} disabled={isFetching}>Next</button>
         </div>
       </section>
     );
