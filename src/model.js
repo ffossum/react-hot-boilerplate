@@ -13,19 +13,24 @@ export default class Model {
     }
     this.isFetching = true;
     const pageToFetch = this.currentPage;
-    const promise = fetch(`https://api.github.com/search/repositories?q=language:javascript&sort=stars&order=desc&per_page=${this.pageSize}&page=${this.currentPage}`)
-      .then(res => res.json())
-      .then(json => {
-        this.pages[pageToFetch] = json.items;
-        this.items = json.items;
-        return this.items;
-      });
+    const promise = fetch(`https://api.github.com/search/repositories?q=language:javascript&sort=stars&order=desc&per_page=${this.pageSize}&page=${this.currentPage}`);
 
     promise.then(() => {
       this.isFetching = false;
     });
 
-    return promise;
+    return promise.then(res => {
+      if (res.ok) {
+        return res.json().then(json => {
+          this.pages[pageToFetch] = json.items;
+          this.items = json.items;
+          return this.items;
+        });
+      } else {
+        this.items = [];
+        return this.items;
+      }
+    });
   }
   nextPage() {
     this.currentPage++;
